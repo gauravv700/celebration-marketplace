@@ -14,7 +14,7 @@ const Home = () => {
       <section className="mx-auto max-w-7xl px-6 py-20">
         <h2 className="mb-10 text-4xl font-bold">Featured Services</h2>
 
-        {/* <FeaturedServices /> */}
+        <FeaturedServices />
       </section>
     </>
   );

@@ -25,7 +25,7 @@ const FeaturedServices = () => {
         return <div className="py-20 text-center">Loading...</div>;
     }
 
-    if (services.length === 0) {
+    if (services?.length === 0) {
         return (
             <div className="py-20 text-center">
                 <h2 className="text-2xl font-bold">No Services Available</h2>
