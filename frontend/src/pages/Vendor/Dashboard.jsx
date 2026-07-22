@@ -1,4 +1,4 @@
-import StatCard from "../../components/vendor/StatCard";
+import StatCard from "../../components/vendor/Statcard";
 
 const Dashboard = () => {
   return (
