@@ -26,7 +26,7 @@ const MyBookings = () => {
   return (
     <div className="mx-auto max-w-7xl px-6 py-12">
       <h1 className="mb-10 text-4xl font-bold">My Bookings</h1>
-      {bookings.length === 0 ? (
+      {bookings?.length === 0 ? (
         <div className="rounded-xl border p-10 text-center">
           No Bookings Yet
         </div>

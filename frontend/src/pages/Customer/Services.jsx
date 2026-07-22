@@ -40,7 +40,7 @@ const Services = () => {
                 Explore Services
             </h1>
 
-            {services.length === 0 ? (
+            {services?.length === 0 ? (
                 <p>No services found.</p>
             ) : (
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

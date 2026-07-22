@@ -1,4 +1,4 @@
-import StatCard from "../../components/vendor/StatCard";
+import StatCard from "../../components/vendor/Statcard";
 
 const Dashboard = () => {
   return (
@@ -6,7 +6,6 @@ const Dashboard = () => {
       <div className="mb-10">
         <h1 className="text-3xl font-bold">Dashboard</h1>
       </div>
-
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <StatCard title="Services" value="0" color="text-blue-600" />
 
