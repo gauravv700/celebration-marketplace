@@ -4,7 +4,7 @@ const router = express.Router();
 const { protect } = require("../middleware/authMiddleware");
 const { authorize } = require("../middleware/authorize");
 
-const { createVendor, getVendorServices, getVendorBookings } = require("../controllers/vendorController");
+const { createVendor, getVendorProfile, getVendorServices, getVendorBookings } = require("../controllers/vendorController");
 
 router.post(
     "/",
@@ -12,6 +12,8 @@ router.post(
     authorize("vendor"),
     createVendor
 );
+
+router.get("/profile", protect, authorize("vendor"), getVendorProfile);
 
 router.get(
     "/services",

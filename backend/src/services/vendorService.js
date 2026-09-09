@@ -38,12 +38,28 @@ const createVendorProfile = async ({
 
   return data;
 };
+
+const getVendorProfile = async (userId) => {
+  const { data, error } = await supabase
+    .from("vendors")
+    .select("id, business_name, description, city, address, phone")
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
 const getVendorServicesRecord = async (userId) => {
+  console.log("Vendor", userId)
   const { data: existingVendor } = await supabase
     .from("vendors")
     .select("id")
     .eq("user_id", userId)
     .single();
+  console.log(existingVendor)
   const { data, error } = await supabase
     .from("services")
     .select("*")
@@ -85,6 +101,7 @@ const getVendorBookingsRecord = async (userId) => {
 };
 module.exports = {
   createVendorProfile,
+  getVendorProfile,
   getVendorServicesRecord,
   getVendorBookingsRecord
 };

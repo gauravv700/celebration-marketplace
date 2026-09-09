@@ -26,7 +26,7 @@ const Sidebar = () => {
             <nav className="space-y-2 p-4">
 
                 <NavLink
-                    to="/vendor/dashboard"
+                    to="/vendor/"
                     end
                     className="flex items-center gap-3 rounded p-3 hover:bg-indigo-600"
                 >
@@ -60,7 +60,7 @@ const Sidebar = () => {
 
                 <button
                     onClick={logout}
-                    className="flex w-full items-center gap-3 rounded p-3 hover:bg-red-500"
+                    className="flex w-full items-center gap-3 rounded bg-red-600 p-3 text-white hover:bg-red-700"
                 >
                     <LogOut />
                     Logout

@@ -1,5 +1,5 @@
 const { ZodError } = require("zod");
-const { createVendorProfile, getVendorServicesRecord, getVendorBookingsRecord } = require("../services/vendorService")
+const { createVendorProfile, getVendorProfile, getVendorServicesRecord, getVendorBookingsRecord } = require("../services/vendorService")
 const { vendorSchema } = require("../validators/vendorValidator")
 
 exports.createVendor = async (req, res) => {
@@ -33,9 +33,26 @@ exports.createVendor = async (req, res) => {
     }
 }
 
+exports.getVendorProfile = async (req, res) => {
+    try {
+        const vendor = await getVendorProfile(req.user.id);
+        return res.status(200).json({
+            success: true,
+            data: vendor
+        });
+    } catch (error) {
+        return res.status(404).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 exports.getVendorServices = async (req, res) => {
     try {
+        console.log("Request coming")
         const services = await getVendorServicesRecord(req.user.id);
+        console.log("Hii" + services)
         return res.status(200).json({
             success: true,
             services

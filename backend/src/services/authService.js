@@ -6,7 +6,11 @@ const signupUser = async ({
     email,
     password,
     phone,
-    role
+    role,
+    businessName,
+    description,
+    city,
+    address
 }) => {
     // Validation will go here
     if (!fullName || !email || !password || !role) {
@@ -29,21 +33,36 @@ const signupUser = async ({
     }
 
     const user = data.user;
-    const { error: profileError } = await supabase.from("users").insert({
+    const { error: userProfileError } = await supabase.from("users").insert({
         id: user.id,
         email: email,
         full_name: fullName,
         phone,
         role
     });
-    if (profileError) {
-        throw new Error(profileError.message);
-    } else {
-        return {
-            id: user.id,
-            email: user.email
-        };
+    if (userProfileError) {
+        throw new Error(userProfileError.message);
     }
+
+    if (role === "vendor") {
+        const { error: vendorProfileError } = await supabase.from("vendors").insert({
+            user_id: user.id,
+            business_name: businessName,
+            description,
+            city,
+            address,
+            phone,
+        });
+
+        if (vendorProfileError) {
+            throw new Error(vendorProfileError.message);
+        }
+    }
+
+    return {
+        id: user.id,
+        email: user.email
+    };
 };
 
 const loginUser = async ({ email, password }) => {

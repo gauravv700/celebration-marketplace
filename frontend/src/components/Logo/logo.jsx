@@ -5,15 +5,15 @@ const Logo = () => {
     return (
         <Link
             to="/"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2.5"
         >
             <PartyPopper
-                className="text-indigo-600"
-                size={30}
+                className="text-amber-300"
+                size={27}
             />
 
-            <span className="text-2xl font-bold text-indigo-600">
-                PartyBook
+            <span className="text-base font-bold tracking-tight text-white sm:text-lg">
+                Celebration <span className="text-amber-300">Marketplace</span>
             </span>
         </Link>
     );

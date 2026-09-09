@@ -38,8 +38,8 @@ const createBookingRecord = async ({
     .select("business_name,user_id")
     .eq("id", service.vendor_id)
     .single();
-  if (vendorError) {
-    throw new Error("Vendor not Found");
+  if (vendorError || !vendor) {
+    throw new Error(vendorError?.message || "Vendor not found for this service");
   }
   console.log(vendor, vendorError)
 

@@ -14,6 +14,7 @@ const MyServices = () => {
   const loadServices = async () => {
     try {
       const response = await getVendorServices();
+      console.log("hello" + response)
       setServices(response.services);
     } catch (error) {
       console.error(error);

@@ -49,7 +49,7 @@ const Login = () => {
         case "vendor":
           navigate("/vendor");
           break;
-          
+
         case "admin":
           navigate("/admin/dashboard");
 

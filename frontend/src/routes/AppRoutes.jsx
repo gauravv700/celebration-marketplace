@@ -9,6 +9,8 @@ import Services from "../pages/Customer/Services";
 import ServiceDetails from "../pages/Customer/ServiceDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import MyBookings from "@/pages/Customer/MyBookings";
+import CustomerProfile from "@/pages/Customer/Profile";
+import About from "@/pages/Customer/About";
 import Dashboard from "@/pages/Vendor/Dashboard";
 import MyServices from "@/pages/Vendor/MyServices";
 import AddService from "@/pages/Vendor/AddService";
@@ -25,6 +27,7 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/about" element={<About />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
           <Route
             path="/my-bookings"
@@ -34,10 +37,18 @@ const AppRoutes = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute roles={["customer"]}>
+                <CustomerProfile />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         <Route
-          path="/vendor"
+          path="/vendor/"
           element={
             <ProtectedRoute roles={["vendor"]}>
               <VendorLayout />

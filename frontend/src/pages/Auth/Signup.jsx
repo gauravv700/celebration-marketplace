@@ -24,10 +24,32 @@ const signupSchema = z
         role: z.enum(["customer", "vendor"], {
             error: "Please select a role",
         }),
+
+        businessName: z.string().optional(),
+        description: z.string().optional(),
+        city: z.string().optional(),
+        address: z.string().optional(),
     })
     .refine((data) => data.password === data.confirmPassword, {
         path: ["confirmPassword"],
         message: "Passwords do not match",
+    })
+    .superRefine((data, ctx) => {
+        if (data.role !== "vendor") return;
+
+        const vendorFields = {
+            businessName: "Business name is required",
+            description: "Description must be at least 10 characters",
+            city: "City is required",
+            address: "Address is required",
+        };
+
+        Object.entries(vendorFields).forEach(([field, message]) => {
+            const value = data[field]?.trim();
+            if (!value || (field === "description" && value.length < 10)) {
+                ctx.addIssue({ code: "custom", path: [field], message });
+            }
+        });
     });
 
 const Signup = () => {
@@ -36,6 +58,7 @@ const Signup = () => {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors, isSubmitting },
     } = useForm({
         resolver: zodResolver(signupSchema),
@@ -43,6 +66,8 @@ const Signup = () => {
             role: "customer",
         },
     });
+
+    const isVendor = watch("role") === "vendor";
 
     const onSubmit = async (data) => {
         try {
@@ -52,6 +77,12 @@ const Signup = () => {
                 phone: data.phone,
                 password: data.password,
                 role: data.role,
+                ...(data.role === "vendor" && {
+                    businessName: data.businessName,
+                    description: data.description,
+                    city: data.city,
+                    address: data.address,
+                }),
             };
 
             await signupApi(payload);
@@ -118,6 +149,47 @@ const Signup = () => {
                             </p>
                         )}
                     </div>
+
+                    {isVendor && (
+                        <>
+                            <Input
+                                label="Business Name"
+                                type="text"
+                                placeholder="Enter business name"
+                                error={errors.businessName}
+                                {...register("businessName")}
+                            />
+
+                            <div className="space-y-1">
+                                <label className="font-medium">Business Description</label>
+                                <textarea
+                                    rows="4"
+                                    placeholder="Tell customers about your business"
+                                    {...register("description")}
+                                    className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-indigo-600"
+                                />
+                                {errors.description && (
+                                    <p className="text-sm text-red-500">{errors.description.message}</p>
+                                )}
+                            </div>
+
+                            <Input
+                                label="City"
+                                type="text"
+                                placeholder="Enter city"
+                                error={errors.city}
+                                {...register("city")}
+                            />
+
+                            <Input
+                                label="Business Address"
+                                type="text"
+                                placeholder="Enter business address"
+                                error={errors.address}
+                                {...register("address")}
+                            />
+                        </>
+                    )}
 
                     <Input
                         label="Password"
