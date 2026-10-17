@@ -316,8 +316,8 @@ server {
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/gauravv700/<your-repo-name>.git
-cd <your-repo-name>
+git clone https://github.com/gauravv700/celebration-marketplace.git
+cd <celebration-marketplace>
 
 # 2. Install backend dependencies
 cd server
