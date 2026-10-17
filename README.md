@@ -2,7 +2,7 @@
 
 A two-sided event-booking marketplace where customers discover and book vendor services for their celebrations and pay securely through Stripe. Vendors are onboarded through an approval workflow, manage their own listings, and track bookings in real time.
 
-![Celebration Marketplace home page](./docs/screenshots/home.png)
+![Celebration Marketplace home page](.docs/screenshots/celebration-marketplace.png)
 
 <p>
   <img alt="React" src="https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB">
